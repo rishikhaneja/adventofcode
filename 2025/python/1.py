@@ -1,31 +1,14 @@
 import sys
 
-def solve(input_path):
-
-    with open(input_path, 'r') as input_file:
-        data = input_file.read()
-
+def solve(input_file):
     print("The dial starts by pointing at 50.")
     current = 50
-
-    result = 0
-
-    for line in data.splitlines():
-
+    password = 0
+    for line in input_file:
         line = line.strip()
-
-        direction = line[0]
-        value = int(line[1:])
-        if direction == 'R':
-            current = ((current + value) % 100)
-        elif direction == 'L':
-            current = ((current - value) % 100)
-
-        print(f"The dial is rotated {direction}{value} to point at {current}. {'*' if current == 0 else ''}")
-
-        if current == 0:
-            result += 1
-
-    print(f"Because the dial points at 0 a total of {result} times during this process, the password in this example is {result}.")
-
-    return str(result)
+        direction, value = line[0], int(line[1:])
+        current = (current + value * (1 if direction == 'R' else -1)) % 100
+        hit = current == 0
+        password += 1 if hit else 0
+        print(f"The dial is rotated {direction}{value} to point at {current}. {'*' if hit else ''}")
+    print(f"Because the dial points at 0 a total of {password} times during this process, the password in this example is {password}.")
