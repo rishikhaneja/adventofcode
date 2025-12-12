@@ -1,5 +1,16 @@
 import os
+import logging
 from importlib import import_module
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(message)s',
+    handlers=[
+        logging.FileHandler("runner.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 input_dir = os.path.join(os.path.dirname(__file__), "..", "input")
 for day in range(1, 12):
@@ -7,6 +18,6 @@ for day in range(1, 12):
         solution_module = import_module(f"{day}")
     except ModuleNotFoundError:
         break
-    print(f"\nDay {day}:")
+    logger.info(f"\nDay {day}:")
     with open(os.path.join(input_dir, f"{day}.txt"), 'r') as input_file:
         solution_module.solve(input_file)
