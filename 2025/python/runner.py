@@ -4,9 +4,9 @@ from importlib import import_module
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(message)s',
+    format='%(module)s: %(message)s',
     handlers=[
-        logging.FileHandler("runner.log"),
+        logging.FileHandler("runner.log", mode='w'),
         logging.StreamHandler()
     ]
 )
@@ -18,6 +18,6 @@ for day in range(1, 12):
         solution_module = import_module(f"{day}")
     except ModuleNotFoundError:
         break
-    logger.info(f"\nDay {day}:")
+    logger.info(f"Day {day}:")
     with open(os.path.join(input_dir, f"{day}.txt"), 'r') as input_file:
         solution_module.solve(input_file)
