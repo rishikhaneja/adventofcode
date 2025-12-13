@@ -2,6 +2,7 @@ from io import TextIOWrapper
 import logging
 
 logger = logging.getLogger(__name__)
+
 def solve(input_file: TextIOWrapper):
     sum_invalid = 0
     for range_str in input_file.read().split(","):

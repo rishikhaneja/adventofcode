@@ -2,6 +2,7 @@ import logging
 import sys
 
 logger = logging.getLogger(__name__)
+
 def solve(input_file):
     logger.info("The dial starts by pointing at 50.")
     current = 50

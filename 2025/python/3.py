@@ -2,6 +2,7 @@ import logging
 from io import TextIOWrapper
 
 logger = logging.getLogger(__name__)
+
 def solve(input_file: TextIOWrapper):
     total = 0
     for line in input_file:
